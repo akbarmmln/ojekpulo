@@ -10,7 +10,7 @@ this is one of the repositories for my building website with Node.js and Express
     a.  node.js
     b.  git
     c.  xampp or wampp
-2.  git clone https://crazcode@bitbucket.org/crazcode/repoone.git on terminal or commad prompt
+2.  git clone https://github.com/akbarmmln/ojekpulo.git on terminal or commad prompt
 3.  Open XAMPP Control Panel and start apache and mysql
 4.  Open link localhost/phpmyadmin
 5.  Create a new database and give it named
