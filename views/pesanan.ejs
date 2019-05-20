@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>Ojek Pulo</title>
+        
+        <style>
+        .tab { 
+               display:inline-block; 
+               margin-left: 70px; 
+        }
+
+        .card {
+          box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+          transition: 0.3s;
+          width: 70%;
+          border: 2px solid lightblue;
+          border-radius: 25px 0 25px 0;
+        }
+        
+        .card:hover {
+          box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+        }
+        
+        .containercrv {
+          padding: 2px 50px;
+          background-color: lightblue;
+        }
+        
+        .footercrv {
+          padding: 2px 50px;
+        }
+        
+        .headercrv {
+          padding: 2px 50px;
+        }
+        </style>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <link rel="icon" href="/assets/assetss/images/ship.png" type="image/x-icon">
+        
+        <!-- Google Fonts -->	
+        <link href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900,900i%7CMerriweather:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+        
+        <!-- Bootstrap Stylesheet -->	
+        <link rel="stylesheet" href="/assets/assetss/css/bootstrap.min.css">
+        
+        <link rel="stylesheet" href="/assets/assetss/cardtemp/w3.css">
+        
+        <!-- Font Awesome Stylesheet -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
+            
+        <!-- Custom Stylesheets -->	
+        <link rel="stylesheet" href="/assets/assetss/css/style.css">
+        <link rel="stylesheet" id="cpswitch" href="/assets/assetss/css/orange.css">
+        <link rel="stylesheet" href="/assets/assetss/css/responsive.css">
+        
+        <!--Date-Picker Stylesheet-->
+        <link rel="stylesheet" href="/assets/assetss/css/datepicker.css">
+        
+        <!-- Color Panel -->
+        <link rel="stylesheet" href="/assets/assetss/css/jquery.colorpanel.css">
+        
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    </head>
+    
+    <body>
+        <!--====== LOADER =====-->
+        <div class="loader"></div>
+        
+        <% include header.ejs %>
+
+        <nav class="navbar navbar-default main-navbar navbar-custom navbar-white" id="mynavbar-1">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" id="menu-button">
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>                        
+                    </button>
+                    <!--<a href="" class="navbar-brand"><span><i class="fa fa-ship"></i>OJEK</span>PULO</a>-->
+                </div><!-- end navbar-header -->
+                
+                <div class="collapse navbar-collapse" id="myNavbar1">
+                    <ul class="nav navbar-nav navbar-right navbar-search-link">
+                        <li class="dropdown active"><a href="/app/home">Home<span></span></a></li>
+						
+                        <li class="dropdown"><a href="javascript:void(0)">Jadwal Kapal<span></span></a>
+                        </li>
+                        
+                        <%
+                            if(statlogin == "true")
+                            {
+                                %>
+                                <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Pemesanan<span><i class="fa fa-angle-down"></i></span></a>
+                                    <ul class="dropdown-menu">
+                                    	<li><a href="/app/pesanan">Sedang Berlangsung</a></li>
+                                        <li><a href="">Lihat Daftar Pembelian</a></li>
+                                    </ul>
+                                </li>
+                                <%
+                            }
+                        %>
+
+						<li class="dropdown"><a href="javascript:void(0)">Contact<span></span></a></li>
+						
+                		<li><a href="javascript:void(0)" class="search-button"><span><i class="fa fa-search"></i></span></a></li>
+                    </ul>
+                </div><!-- end navbar collapse -->
+            </div><!-- end container -->
+        </nav><!-- end navbar -->
+		
+        <div class="sidenav-content">
+            <div id="mySidenav" class="sidenav" >
+                <h2 id="web-name"><span><i class="fa fa-ship"></i></span>Ojek Pulo</h2>
+
+                <div id="main-menu">
+                	<div class="closebtn">
+                        <button class="btn btn-default" id="closebtn">&times;</button>
+                    </div><!-- end close-btn -->
+                    
+                    <div class="list-group panel">
+                    
+                        <a href="/app/home" class="list-group-item"><span><i class="fa fa-home link-icon"></i></span>Home<span></span></a>
+                        
+                        <a href="javascript:void(0);" class="list-group-item"><span><i class="fa fa-home link-icon"></i></span>Jadwal Kapal<span></span></a>
+
+                        <%
+                            if(statlogin == "true")
+                            {
+                                %>
+                                <a href="#ships-links" class="list-group-item" data-toggle="collapse" data-parent="#main-menu"><span><i class="fa fa-ship link-icon"></i></span>Pemesanan<span><i class="fa fa-chevron-down arrow"></i></span></a>
+                                <div class="collapse sub-menu" id="ships-links">
+                                    <a href="/app/pesanan" class="list-group-item">Sedang Berlangsung</a>
+                                    <a href="" class="list-group-item">Lihat Daftar Pembelian</a>
+                                </div><!-- end sub-menu -->
+                                <%
+                            }
+                        %>
+						
+                        <a href="javascript:void(0);" class="list-group-item"><span><i class="fa fa-globe link-icon"></i></span>Contact<span></span></a>
+                    </div><!-- end list-group -->
+                </div><!-- end main-menu -->
+            </div><!-- end mySidenav -->
+        </div><!-- end sidenav-content -->
+
+        <!--======================= PAGE-COVER =====================-->
+        <section class="w3-blue back-size" id="cover-cruise-search">
+            <div class="container">
+                <div class="row">
+                    <br>
+                    <div class="col-sm-12">
+                    	<h2 class="page-title">Pesanan Aktif dan E-Tickets</h2>
+                    </div><!-- end columns -->
+                </div><!-- end row -->
+            </div><!-- end container -->
+            <br>
+        </section><!-- end page-cover -->
+        
+        <!--===== INNERPAGE-WRAPPER ====-->
+        <section class="innerpage-wrapper">
+        	<div id="search-result-page" class="innerpage-section-padding">
+        		<div class="container">
+        			<div class="row">
+                        <%
+                            if(data.length > 0)
+                            {
+                                for(var i=0; i<data.length; i++)
+                                {
+                                    %>
+                                    <div class="card">
+                                        <header class="headercrv">
+                                            <p><h5>Booking ID <span class="tab"><%=data[i].id_booking%></span> <span class="tab">Tanggal Berangkat &nbsp; <%=moment(data[i].tanggal_keberangkatan).format('DD-MM-YYYY')%></span></h5></p>
+                                        </header>
+                                        <div class="containercrv">
+                                            <h4><b><%=data[i].asal%> <i class="fa fa-long-arrow-right"></i> <%=data[i].tujuan%> / <%=data[i].waktu_berangkat%> <i class="fa fa-long-arrow-right"></i> <%=data[i].waktu_tiba%></b></h4> 
+                                        </div>
+                                        <footer class="footercrv">
+                                            <h5>
+                                                <%
+                                                    if(data[i].status_pembayaran == "Pending")
+                                                    {
+                                                        %>
+                                                        Belum Memilih Jenis Pembayaran / 
+                                                        <p style="display:inline-block"><a href="/app/pembayaran/po=<%=data[i].id_jadwal%>&pt=<%=data[i].id_booking%>">Lanjutkan Pemesanan</a></p> |
+                                                        <p style="display:inline-block"><a href="javascript:void(0)">Rincian</a></p> |
+                                                        <p style="display:inline-block"><a href="javascript:sumbitCancel('<%=data[i].id_booking%>')">Batalkan</a></p>
+                                                        <p>
+                                                            Selesaikan pembayaran sebelum tanggal <%=moment(data[i].ws).format('DD-MM-YYYY HH:mm')%>
+                                                        </p>
+                                                        <%
+                                                    }
+                                                    else if(data[i].status_pembayaran == "ON")
+                                                    {
+                                                        %>
+                                                        Menunggu Pembayaran / 
+                                                        <p style="display:inline-block"><a href="javascript:void(0)">Lihat Kode Bayar</a></p> |
+                                                        <p style="display:inline-block"><a href="javascript:void(0)">Rincian</a></p> |
+                                                        <p style="display:inline-block"><a href="javascript:sumbitCancel('<%=data[i].id_booking%>')">Batalkan</a></p>
+                                                        <p>
+                                                            Selesaikan pembayaran sebelum tanggal <%=moment(data[i].ws).format('DD-MM-YYYY HH:mm')%>
+                                                        </p>
+                                                        <%
+                                                    }
+                                                    else if(data[i].status_pembayaran == "Expired")
+                                                    {
+                                                        %>
+                                                        Dibatalkan / Waktu Pembayaran Habis
+                                                        <%
+                                                    }
+                                                    else
+                                                    {
+                                                        %>
+                                                        Pembayaran Tervalidasi /
+                                                        <p style="display:inline-block"><a href="javascript:void(0)">Rincian</a></p>
+                                                        <%
+                                                    }
+                                                %>
+                                            </h5>
+                                        </footer>
+                                        <script type="text/javascript">
+                                            function sumbitCancel(val){
+                                                var retVal = confirm("Apakah Anda ingin melanjutkan ? Pembatalan pemesanan tidak dapat dikembalikan.");
+                                                if( retVal == true )
+                                                {
+                                                    var link = '/app/cancelbooking';
+                                                    window.location.href = link+'/'+val;
+                                                    return true;
+                                                }
+                                                else
+                                                {
+                                                    return false;
+                                                }
+                                            }
+                                        </script>
+                                    </div>
+                                    <br>
+                                    <%
+                                }
+                            }
+                            else
+                            {
+                                %>
+                                <center>
+                                    <img src="/assets/assetss/images/nolist.png" width="200dp" alt="nolist-img" /> &nbsp;&nbsp; <strong>Anda tidak memiliki pesanan aktif. Silahkan lakukan pemesanan di menu awal</strong>
+                                </center>
+                                <%
+                            }
+                        %>
+                    </div><!-- end row -->
+            	</div><!-- end container -->
+            </div><!-- end search-result-page -->
+        </section><!-- end innerpage-wrapper -->
+        
+        <% include footer.ejs %>
+		
+        <!-- Page Scripts Starts -->
+        <script src="/assets/assetss/js/jquery.min.js"></script>
+        <script src="/assets/assetss/js/jquery.colorpanel.js"></script>
+        <script src="/assets/assetss/js/bootstrap.min.js"></script>
+        <script src="/assets/assetss/js/bootstrap-datepicker.js"></script>
+        <script src="/assets/assetss/js/custom-navigation.js"></script>
+		<script src="/assets/assetss/js/custom-date-picker.js"></script>
+        <!-- Page Scripts Ends -->
+    </body>
+</html>

@@ -1,0 +1,594 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>Ojek Pulo</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <link rel="icon" href="/assets/assetss/images/ship.png" type="image/x-icon">
+        
+        <!--DateTime -->
+        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+
+        <!-- Google Fonts -->	
+        <link href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900,900i%7CMerriweather:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+
+        <!-- Bootstrap Stylesheet -->
+        <link rel="stylesheet" href="/assets/assetss/css/bootstrap.min.css">
+        
+        <link rel="stylesheet" href="/assets/assetss/cardtemp/w3.css">
+        
+        <!-- Font Awesome Stylesheet -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
+            
+        <!-- Custom Stylesheets -->	
+        <link rel="stylesheet" href="/assets/assetss/css/style.css">
+        <link rel="stylesheet" id="cpswitch" href="/assets/assetss/css/orange.css">
+        <link rel="stylesheet" href="/assets/assetss/css/responsive.css">
+        
+        <!--Date-Picker Stylesheet
+        <link rel="stylesheet" href="<?php echo base_url('assetss/css/datepicker.css');?>">
+        -->
+        
+        <!-- Color Panel -->
+        <link rel="stylesheet" href="/assets/assetss/css/jquery.colorpanel.css">
+        <style type="text/css">
+            .ui-datepicker {
+                background: -webkit-gradient(linear, left top, left 25, from(#A4FFA4), color-stop(4%, #006600), to(#A4FFA4));
+                background: -webkit-gradient(linear, left top, right 25, from(#A4FFA4), color-stop(4%, #006600), to(#A4FFA4));
+                background: -moz-linear-gradient(top, #A4FFA4, #006600 1px, #FFFFFF 25px);
+                border-radius: 10px;
+            }
+        </style>
+        <style type="text/css">
+							.modal {
+								display: none; /* Hidden by default */
+								position: fixed; /* Stay in place */
+								z-index: 1; /* Sit on top */
+								padding-top: 130px; /* Location of the box */
+								left: 0;
+								top: 0;
+								width: 100%; /* Full width */
+								height: 100%; /* Full height */
+								overflow: auto; /* Enable scroll if needed */
+								background-color: rgb(0,0,0); /* Fallback color */
+								background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+							}
+
+							/* Modal Content */
+							.modal-content {
+								position: relative;
+								background-color: #fefefe;
+								margin: auto;
+								padding: 0;
+								border: 1px solid #888;
+								width: 20%;
+								box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+								-webkit-animation-name: animatetop;
+								-webkit-animation-duration: 0.4s;
+								animation-name: animatetop;
+								animation-duration: 0.4s
+							}
+
+							/* Add Animation */
+							@-webkit-keyframes animatetop {
+								from {top:-300px; opacity:0} 
+								to {top:0; opacity:1}
+							}
+
+							@keyframes animatetop {
+								from {top:-300px; opacity:0}
+								to {top:0; opacity:1}
+							}
+
+							/* The Close Button */
+							.closeMS {
+								color: white;
+								float: right;
+								font-size: 28px;
+								font-weight: bold;
+							}
+
+							.closeMS:hover,
+							.closeMS:focus {
+								color: #000;
+								text-decoration: none;
+								cursor: pointer;
+							}
+
+							.modal-header {
+								padding: 2px 16px;
+								background-color: #5cb85c;
+								color: white;
+							}
+
+							.modal-body {padding: 2px 16px;}
+
+							.modal-footer {
+								padding: 2px 16px;
+								background-color: #5cb85c;
+								color: white;
+							}
+
+							.footer {
+							   position: fixed;
+							   left: 0;
+							   bottom: 0;
+							   width: 100%;
+							   background-color: #4af7dd;
+							   color: #272d2d;
+							   text-align: center;
+							}
+        </style>
+    </head>
+    
+    <body>
+        <!--====== LOADER =====-->
+        <div class="loader"></div>
+
+        <% include header.ejs %>
+        
+        <nav class="navbar navbar-default main-navbar navbar-custom navbar-white" id="mynavbar-1">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" id="menu-button">
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>                        
+                    </button>
+                    <!--<a href="" class="navbar-brand"><span><i class="fa fa-ship"></i>OJEK</span>PULO</a>-->
+                </div><!-- end navbar-header -->
+                
+                <div class="collapse navbar-collapse" id="myNavbar1">
+                    <ul class="nav navbar-nav navbar-right navbar-search-link">
+                        <li class="dropdown active"><a href="/app/home">Home<span></span></a></li>
+						
+                        <li class="dropdown"><a href="javascript:void(0)">Jadwal Kapal<span></span></a></li>
+
+                        <%
+                        if(statlogin == "true")
+                        {
+                            %>
+                            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Pemesanan<span><i class="fa fa-angle-down"></i></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="/app/pesanan">Sedang Berlangsung</a></li>
+                                    <li><a href="">Lihat Daftar Pembelian</a></li>
+                                </ul>
+                            </li>
+                            <%
+                        }
+                        %>
+
+						<li class="dropdown"><a href="javascript:void(0)">Contact<span></span></a></li>
+						
+                		<li><a href="javascript:void(0)" class="search-button"><span><i class="fa fa-search"></i></span></a></li>
+                    </ul>
+                </div><!-- end navbar collapse -->
+            </div><!-- end container -->
+        </nav><!-- end navbar -->
+		
+        <div class="sidenav-content">
+            <div id="mySidenav" class="sidenav" >
+                <h2 id="web-name"><span><i class="fa fa-ship"></i></span>Ojek Pulo</h2>
+
+                <div id="main-menu">
+                	<div class="closebtn">
+                        <button class="btn btn-default" id="closebtn">&times;</button>
+                    </div><!-- end close-btn -->
+                    
+                    <div class="list-group panel">
+                    
+                        <a href="/app/home" class="list-group-item active"><span><i class="fa fa-home link-icon"></i></span>Home<span></span></a>
+                        
+                        <a href="javascript:void(0)" class="list-group-item"><span><i class="fa fa-home link-icon"></i></span>Jadwal Kapal<span></span></a>
+                        
+                        <%
+                        if(statlogin == "true")
+                        {
+                            %>
+                            <a href="#ships-links" class="list-group-item" data-toggle="collapse" data-parent="#main-menu"><span><i class="fa fa-ship link-icon"></i></span>Pemesanan<span><i class="fa fa-chevron-down arrow"></i></span></a>
+                            <div class="collapse sub-menu" id="ships-links">
+                                <a href="/app/pesanan" class="list-group-item">Sedang Berlangsung</a>
+                                <a href="" class="list-group-item">Lihat Daftar Pembelian</a>
+                            </div><!-- end sub-menu -->
+                            <%
+                        }
+                        %>
+
+                        <a href="javascript:void(0)" class="list-group-item"><span><i class="fa fa-globe link-icon"></i></span>Contact<span></span></a>
+                    </div><!-- end list-group -->
+                </div><!-- end main-menu -->
+            </div><!-- end mySidenav -->
+        </div><!-- end sidenav-content -->
+
+        <!--======================= PAGE-COVER =====================-->
+        <section class="w3-blue back-size" id="cover-cruise-search">
+            <div class="container">
+                <div class="row">
+                    <br>
+                    <div class="col-sm-12">
+                        <h2 class="page-title"><%=asal%> <i class="fa fa-arrow-right"></i> <%=tujuan%></h2>
+                        <ul class="w3-blue breadcrumb">
+                            <li>
+                                <%
+                                    var hari = moment(date).format('dddd');
+                                    var tanggalfull = moment(date).format('DD MMMM YYYY');
+                                %>
+                                <%=hari%>,
+                                <%=tanggalfull%>
+                            </li>
+                            <li><%=pax%> Penumpang</li>
+                        </ul>    
+                        <button onclick="ubah()" class="btn btn-orange">Ubah Pencarian</button>
+                    </div><!-- end columns -->
+                </div><!-- end row -->
+            </div><!-- end container -->
+            <br>
+        </section><!-- end page-cover -->
+        
+        <script>
+            function ubah()
+            {
+                var x = document.getElementById("hiddensearch");
+                if (x.style.display === "none")
+                {
+                    x.style.display = "block";
+                }
+                else
+                {
+                    x.style.display = "none";
+                }
+            }
+        </script>
+
+        <!--===== INNERPAGE-WRAPPER ====-->
+        <section class="innerpage-wrapper">
+        	<div id="search-result-page" class="innerpage-section-padding">
+        		<div class="container">
+        			<div class="row">
+                        
+						<script>
+							function validateFormCari() {
+								var asal = document.forms["cariform"]["asal"].value;
+								var tujuan = document.forms["cariform"]["tujuan"].value;
+								var tanggalberangkat = document.forms["cariform"]["date-start"].value;
+								var jumlah = document.forms["cariform"]["pax"].value;
+								if (asal == "")
+								{
+									alert("Asal keberangkatan harus terisi");
+									return false;
+								}
+								else if(tujuan == "")
+								{
+									alert("Tujuan kedatangan harus terisi");
+									return false;
+								}
+								else if(tanggalberangkat == "")
+								{
+									alert("Tanggal keberangkatan harus terisi");
+									return false;
+								}
+								else if(jumlah == "")
+								{
+									alert("Jumlah Penumpang harus terisi");
+									return false;
+								}
+							}
+						</script>
+
+                    	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 content-side">
+                        	<div id="hiddensearch" class="page-search-form">
+                            	<h2>Pencarian Tiket <span>Kapal <i class="fa fa-ship"></i></span></h2>
+                                
+                                <form class="pg-search-form" name="cariform" action="/app/pencarian" method="POST" onSubmit="return validateFormCari()">
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                                            <div class="form-group">
+                                                <label><span><i class="fa fa-map-marker"></i></span>Keberangkatan</label>
+													<select class="form-control" name="asal">
+                                                        <option value="">Pilih</option>
+                                                        <%
+                                                            var option = [ "Pulau Tidung", "Kali Adem (Muara Angke)" ];
+                                                            for(var i=0; i<option.length; i++)
+                                                            {
+                                                                var selected = (asal == option[i]) ? "selected" : "";
+                                                                %>
+                                                                <option value="<%=option[i]%>" <%=selected %>><%=option[i]%></option>
+                                                                <%
+                                                            }
+                                                        %>
+													</select>
+                                            </div>
+                                        </div><!-- end columns -->
+                                        
+                                        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                                            <div class="form-group">
+                                                <label><span><i class="fa fa-map-marker"></i></span>Kedatangan</label>
+													<select class="form-control" name="tujuan">
+														<option value="">Pilih</option>
+                                                        <%
+                                                            var option = [ "Pulau Tidung", "Kali Adem (Muara Angke)" ];
+                                                            for(var i=0; i<option.length; i++)
+                                                            {
+                                                                var selected = (tujuan == option[i]) ? "selected" : "";
+                                                                %>
+                                                                <option value="<%=option[i]%>" <%=selected %>><%=option[i]%></option>
+                                                                <%
+                                                            }
+                                                        %>
+													</select>
+                                            </div>
+                                        </div><!-- end columns -->
+                                        
+                                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                            <div class="row">
+                                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                                    <div class="form-group">
+                                                        <label><span><i class="fa fa-calendar"></i></span>Tanggal Keberangkatan</label>
+                                                        <%
+                                                            var tanggal = moment(date).format('DD MMMM YYYY');
+                                                        %>
+                                                        <input class="form-control" id="date-start" name="datestart" value="<%=tanggal%>" placeholder="Tanggal" readonly/>
+                                                    </div>
+                                                </div><!-- end columns -->
+                                            </div>
+                                        </div><!-- end columns -->
+                                        
+                                        <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                            <div class="form-group">
+                                                <label><span><i class="fa fa-users"></i></span>Penumpang</label>
+                                                    <select class="form-control" name="pax">
+                                                            <%
+                                                            var option = [ "1", "2", "3" ];
+                                                            for(var i=0; i<option.length; i++)
+                                                            {
+                                                                var selected = (pax == option[i]) ? "selected" : "";
+                                                                %>
+                                                                <option value="<%=option[i]%>" <%=selected %>><%=option[i]%></option>
+                                                                <%
+                                                            }
+                                                        %>
+                                                    </select>
+											</div>
+                                        </div><!-- end columns -->
+                                    </div><!-- end row -->
+                                    
+                                    <center><button class="btn btn-orange">CARI TIKET</button></center>
+                                </form>
+                            </div><!-- end page-search-form -->
+
+                            <div class="row">
+                                <div class="w3-container">
+                                            <div id="myModalMS" class="modal">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <span class="closeMS">&times;</span>
+                                                        <center><h4>Masuk ke Akun Anda</h4></center>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form action="/app/splogin" method="POST">
+                                                            <div class="form-group">
+                                                                <div class="form-line">
+                                                                    <input type="hidden" class="form-control" name="pilidjad" id="pilidjad" readonly required/>
+                                                                </div>
+                                                                <div class="form-line">
+                                                                    <input type="hidden" class="form-control" name="piltgl" id="piltgl" readonly required/>
+                                                                </div>
+                                                                <div class="form-line">
+                                                                    <input type="hidden" class="form-control" name="piljml" id="piljml" readonly required/>
+                                                                </div>
+                                                                <br>
+                                                                <div class="form-line">
+                                                                    <label>Email</label>
+                                                                    <input type="email" class="form-control" id="email" name="email" placeholder="Email" oninvalid="this.setCustomValidity('Masukkan alamat email yang valid')" oninput="this.setCustomValidity('')" required/>
+                                                                </div>
+                                                                <br>
+                                                                <div class="form-line">
+                                                                    <label>Password</label>
+                                                                    <input type="password" class="form-control" id="password" name="password" placeholder="Password" oninvalid="this.setCustomValidity('Masukkan Password yang valid')" oninput="this.setCustomValidity('')" required/>
+                                                                </div>
+                                                            </div>
+                                                            <button type="submit" class="w3-button w3-block w3-theme-11">LOGIN</button>
+                                                            <br>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                    <%
+                                        if(judul == "true")
+                                        {
+                                            for(var i=0; i<data.length; i++)
+                                            {
+                                                var berangkat  = moment(data[i].tanggal).format('DD/MM/YYYY') + ' ' + data[i].waktu_berangkat;
+                                                var tiba = moment(data[i].tanggal).format('DD/MM/YYYY') + ' ' + data[i].waktu_tiba;
+                                                
+                                                var ms = moment(tiba,"DD/MM/YYYY HH:mm:ss").diff(moment(berangkat,"DD/MM/YYYY HH:mm:ss"));
+                                                var d = moment.duration(ms);
+                                                var s = Math.floor(d.asHours()) + " jam " + moment.utc(ms).format("mm") + " menit";
+
+                                                var dipesan = data[i].dipesan;
+                                                if(dipesan == "NULL")
+                                                {
+                                                    dipesan = 0;
+                                                }
+                                                var banyakkursi = data[i].jumlah_kursi;
+                                                var sisa = banyakkursi - dipesan;
+
+                                                var tgljamsekarang = moment().format('DD/MM/YYYY HH:mm:ss');
+                                                var am = moment(berangkat,"DD/MM/YYYY HH:mm:ss").diff(moment(tgljamsekarang,"DD/MM/YYYY HH:mm:ss"));
+                                                var ad = moment.duration(am);
+                                                var as = Math.floor(ad.asHours());
+                                                %>
+                                                <div class="w3-panel w3-card w3-pale-blue w3-hover-shadow w3-center w3-border" style="background-image: url(/assets/assetss/images/ocean.jpg); background-repeat: no-repeat; background-size: cover; width:100%">
+                                                    <br>
+                                                    <div class="main-mask w3-orange">
+                                                        <ul class="list-unstyled list-inline offer-price-1">
+                                                            <li class="price"><%=data[i].nama_kapal%><span class="divider">|</span><span style="color:black"; class="pkg"><%= s%></span><span class="divider">|</span><span style="color:black"; class="pkg"><%=sisa%> kursi Tersisa</span>
+                                                            </li>
+                                                        </ul>
+                                                    </div><!-- end main-mask -->
+                                                    <br>
+                                                    <div class="w3-row">
+                                                        <div class="w3-third w3-center">
+															<h5><%=data[i].waktu_berangkat%> WIB</h5>
+															<h5><%=data[i].asal%></h5>
+														</div>
+														<div class="w3-third w3-center">
+															<h5><%=data[i].waktu_tiba%> WIB</h5>
+															<h5><%=data[i].tujuan%></h5>
+                                                        </div>
+                                                        <div class="w3-third w3-center w3-margin-bottom">
+                                                            <h5 style="color:green">
+                                                                <%
+                                                                    function convertToRupiah(angka)
+                                                                    {
+                                                                        var rupiah = '';		
+                                                                        var angkarev = angka.toString().split('').reverse().join('');
+                                                                        for(var i = 0; i < angkarev.length; i++) if(i%3 == 0) rupiah += angkarev.substr(i,3)+'.';
+                                                                        return 'Rp. '+rupiah.split('',rupiah.length-1).reverse().join('');
+                                                                    }
+                                                                %>
+                                                                <%=convertToRupiah(data[i].harga)%>/orang
+                                                            </h5>
+                                                            <%
+                                                                if(sisa == 0)
+                                                                {
+                                                                    %>
+                                                                    <button class="btn btn-orange" style="width:200px;" disabled>Habis</button>
+                                                                    <%
+                                                                }
+                                                                else
+                                                                {
+                                                                    if(am < 0)
+                                                                    {
+                                                                        %>
+                                                                        <button class="btn btn-orange" style="width:200px;" disabled>Closed</button>
+                                                                        <%   
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        if(sisa < pax)
+                                                                        {
+                                                                            %>
+                                                                            <button class="btn btn-orange" style="width:200px;" disabled>Tiket Tidak Mencukupi</button>
+                                                                            <%
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            if(as <= 4)
+                                                                            {
+                                                                                %>
+                                                                                <button class="btn btn-orange" style="width:200px;" disabled>Closed</button>
+                                                                                <%
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                %>
+        																		<form action="/app/booking" method="POST" onSubmit="return validateForm()">
+        																			<input type="hidden" class="form-control input-lg" name="idjdwal" value="<%=data[i].id_jadwal%>"/>
+        																			<input type="hidden" class="form-control input-lg" name="jumlahpenumpang" value="<%=pax%>"/>
+        																			<input type="hidden" class="form-control input-lg" name="tanggalberangkat" value="<%=date%>"/>
+        																			<button class="btn btn-orange" data-idjad="<%=data[i].id_jadwal%>" style="width:200px;">Pilih</button>
+                                                                                </form>
+                                                                                <%
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            %>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <%    
+                                            }
+                                        }
+                                        else
+                                        {
+                                            %>
+                                            <center>
+                                                <img src="/assets/assetss/images/noticketfoundship.png" class="img-responsive" alt="hotel-img" />
+                                                Tidak Ditemukan Tiket Perjalanan. Silahkan Ubah Tujuan dan/atau Tanggal Yang lain
+                                            </center>
+                                            <%
+                                        }
+                                    %>
+                                </div>
+                            </div>
+                        </div><!-- end columns -->
+
+                        <script>
+							function validateForm()
+							{
+                                var log = "<%=statlogin%>";
+                                if(log != "true")
+								{
+                                    $(document).on("click", ".btn", function () {
+                                        var dataidjad = $(this).data('idjad');
+                                        var datatanggal = "<%=date%>";
+                                        var datajumlah = "<%=pax%>";
+
+                                        document.getElementById('pilidjad').value = dataidjad;
+                                        document.getElementById('piltgl').value = datatanggal;
+                                        document.getElementById('piljml').value = datajumlah;
+
+                                        var myModalMS = document.getElementById('myModalMS');
+                                        var spanMS = document.getElementsByClassName('closeMS')[0];
+                                        myModalMS.style.display = "block";
+
+                                        spanMS.onclick = function()
+                                        {
+                                            document.getElementById('email').value = "";
+                                            document.getElementById('password').value = "";
+                                            document.getElementById('pilidjad').value = "";
+                                            document.getElementById('piltgl').value = "";
+                                            document.getElementById('piljml').value = "";
+                                            myModalMS.style.display = "none";
+                                        }
+                                    });
+                                    return false;
+								}
+                            }
+						</script>
+
+                    </div><!-- end row -->
+            	</div><!-- end container -->
+            </div><!-- end search-result-page -->
+        </section><!-- end innerpage-wrapper -->
+
+        <% include footer.ejs %>
+
+        <script>
+            document.getElementById("hiddensearch").style.display = 'none';
+        </script>
+
+        <!-- Page Scripts Starts -->
+        <script src="/assets/assetss/js/jquery.min.js"></script>
+        <script src="/assets/assetss/js/jquery.colorpanel.js"></script>
+        <script src="/assets/assetss/js/bootstrap.min.js"></script>
+        <!--<script src="<?php echo base_url('assetss/js/bootstrap-datepicker.js');?>"></script>-->
+        <script src="/assets/assetss/js/custom-navigation.js"></script>
+		<!--<script src="<?php echo base_url('assetss/js/custom-date-picker.js');?>"></script>-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+        <!-- Page Scripts Ends -->
+    </body>
+
+            <script>
+            $(function(){
+                var date = new Date();
+                var minDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+                $('#date-start').datepicker({
+            		defaultDate: "+3d",
+                    minDate: minDate,
+                    maxDate: "+2M",
+                    dateFormat: 'dd MM yy',
+                    showOtherMonths: true,
+                    changeMonth: true,
+                    selectOtherMonths: true,
+                    required: true,
+                    showOn: "focus",
+                    numberOfMonths: 2
+                    //beforeShowDay: $.datepicker.noWeekends
+                });
+            });
+        </script>
+</html>

@@ -1,0 +1,319 @@
+<%
+    var nk = data[0].nama_kapal;
+    var k = data[0].asal;
+    var t = data[0].tujuan;
+    var jb = data[0].waktu_berangkat;
+    var jt = data[0].waktu_tiba;
+    var hpo = data[0].harga;
+%>
+        <!doctype html>
+        <html lang="en">
+            <head>
+                <title>Ojek Pulo</title>
+                <meta charset="utf-8">
+                <meta name="viewport" content="width=device-width,initial-scale=1">
+                <link rel="icon" href="/assets/assetss/images/ship.png" type="image/x-icon">
+                
+                <!-- Google Fonts -->	
+                <link href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900,900i%7CMerriweather:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+                
+                <!-- Bootstrap Stylesheet -->
+                <link rel="stylesheet" href="/assets/assetss/css/bootstrap.min.css">
+                
+                <link rel="stylesheet" href="/assets/assetss/cardtemp/w3.css">
+                
+                <!-- Font Awesome Stylesheet -->
+                <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
+                    
+                <!-- Custom Stylesheets -->	
+                <link rel="stylesheet" href="/assets/assetss/css/style.css">
+                <link rel="stylesheet" id="cpswitch" href="/assets/assetss/css/orange.css">
+                <link rel="stylesheet" href="/assets/assetss/css/responsive.css">
+                
+                <!--Date-Picker Stylesheet-->
+                <link rel="stylesheet" href="/assets/assetss/css/datepicker.css">
+                
+                <!-- Color Panel -->
+                <link rel="stylesheet" href="/assets/assetss/css/jquery.colorpanel.css">
+            </head>
+            
+            <body>
+                <!--====== LOADER =====-->
+                <div class="loader"></div>
+        
+                <?php $this->view('headertop');?>
+        		
+                <nav class="navbar navbar-default main-navbar navbar-custom navbar-white" id="mynavbar-1">
+                    <div class="container">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" id="menu-button">
+                              <span class="icon-bar"></span>
+                              <span class="icon-bar"></span>
+                              <span class="icon-bar"></span>                        
+                            </button>
+                            <!--<a href="" class="navbar-brand"><span><i class="fa fa-ship"></i>OJEK</span>PULO</a>-->
+                        </div><!-- end navbar-header -->
+                        
+                        <div class="collapse navbar-collapse" id="myNavbar1">
+                            <ul class="nav navbar-nav navbar-right navbar-search-link">
+                        		<li>
+                        		    <a href="javascript:void(0)" class="search-button"><span><i class="fa fa-search"></i></span></a>
+                        		</li>
+                            </ul>
+                        </div><!-- end navbar collapse -->
+                    </div><!-- end container -->
+                </nav><!-- end navbar -->
+                
+                <!--======================= PAGE-COVER =====================-->
+                <nav class="navbar navbar-default main-navbar navbar-custom navbar-white" id="mynavbar-2">
+                    <section class="w3-blue back-size" id="cover-cruise-search">
+                        <div class="container">
+                            <div class="row">
+                                <br>
+                                <div class="col-sm-12">
+                                	<h2 class="page-title">Pemesanan <span id='time'></span></h2>
+                                    <script>
+                                            var counter = "<%=cowktisi%>";
+                                            var expires = 120;
+                                            setInterval(function() {
+                                                counter--;
+                                                document.cookie = "waktuisi=" + counter + "; path=/";
+                
+                                                if (counter >= 0) {
+                                                    span = document.getElementById("time");
+                                                    span.innerHTML = "(waktu tersisa " + parseInt(counter / 60) + " menit " + counter % 60 + " detik)";
+                                                }
+                                                else
+                                                {
+                                                    span = document.getElementById("time");
+                                                    span.innerHTML = "(waktu pengisian habis)";
+                                                }
+                                                
+                                                if (counter === 0) {
+                                                    clearInterval(counter);
+                                                    alert('Waktu pengisian pesanan sudah habis');
+                                                    var link = '/app/home';
+                                                    window.location.href = link;
+                                                }
+                                            }, 1000);
+                                        </script>
+                                </div><!-- end columns -->
+                            </div><!-- end row -->
+                        </div><!-- end container -->
+                        <br>
+                    </section><!-- end page-cover -->
+                </nav>
+        		
+                <!--===== INNERPAGE-WRAPPER ====-->
+                <section class="innerpage-wrapper">
+                	<div id="cruise-booking" class="innerpage-section-padding">
+                        <div class="container">
+                            <div class="row">
+                            	<div class="col-xs-12 col-sm-12 col-md-5 col-lg-4 side-bar left-side-bar">
+                                	<div class="row">
+                                    
+                                        <div class="col-xs-12 col-sm-6 col-md-12">
+                                            <div class="side-bar-block detail-block style2 text-center">
+                                                <div class="detail-img text-center">
+        											<br><br><br><br><br>
+                                                    <div class="detail-title">
+                                                        <h4><a>Kapal Pergi</a></h4>
+                                                        <p>
+                                                            <%
+                                                                var hari = moment(date).format('dddd');
+                                                                var tanggalfull = moment(date).format('DD MMMM YYYY');
+                                                            %>
+                                                            <%=hari%>,
+                                                            <%=tanggalfull%>
+                                                        </p>
+                                                    </div><!-- end detail-title -->
+                                                </div><!-- end detail-img -->
+                                                
+                                                <div class="table-responsive">
+                                                    <table class="table">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>Nama Kapal</td>
+                                                                <td><%=nk%></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Keberangkatan</td>
+                                                                <td><%=k%></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Kedatangan</td>
+                                                                <td><%=t%></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Jam Berangkat</td>
+                                                                <td><%=jb%></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Jam Tiba</td>
+                                                                <td><%=jt%></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Lama Perjalanan</td>
+                                                                <td>
+                                                                    <%
+                                                                        var then  = moment(date).format('DD/MM/YYYY') + ' ' + data[0].waktu_berangkat;
+                                                                        var now = moment(date).format('DD/MM/YYYY') + ' ' + data[0].waktu_tiba;
+                                                                        var ms = moment(now,"DD/MM/YYYY HH:mm:ss").diff(moment(then,"DD/MM/YYYY HH:mm:ss"));
+                                                                        var d = moment.duration(ms);
+                                                                        var s = Math.floor(d.asHours()) + " jam " + moment.utc(ms).format("mm") + " menit";
+                                                                    %>
+                                                                    <%=s%>
+        														</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Jumlah Penumpang</td>
+                                                                <td><%=jp%></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Harga Per Orang</td>
+                                                                <td><%=hpo%></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Jumlah Harga</td>
+                                                                <td>
+                                                                    <%
+                                                                        function convertToRupiah(angka)
+                                                                        {
+                                                                            var rupiah = '';		
+                                                                            var angkarev = angka.toString().split('').reverse().join('');
+                                                                            for(var i = 0; i < angkarev.length; i++) if(i%3 == 0) rupiah += angkarev.substr(i,3)+'.';
+                                                                            return 'Rp. '+rupiah.split('',rupiah.length-1).reverse().join('');
+                                                                        }
+
+                                                                        var hpo = hpo;
+                                                                        var jumlah = jp;
+                                                                        var total = hpo * jp;
+                                                                    %>
+                                                                    <%=convertToRupiah(total)%>
+        														</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div><!-- end table-responsive -->
+                                            </div><!-- end side-bar-block -->
+                                        </div><!-- end columns -->
+                                        
+                                        <div class="col-xs-12 col-sm-6 col-md-12">    
+                                            <div class="side-bar-block support-block">
+                                                <h3>Pusat Bantuan</h3>
+                                                <p>Hubungi di nomor berikut</p>
+                                                <div class="support-contact">
+                                                    <span><i class="fa fa-phone"></i></span>
+                                                    <p>+00 123 4567</p>
+                                                </div><!-- end support-contact -->
+                                            </div><!-- end side-bar-block -->
+                                        </div><!-- end columns -->
+                                    </div><!-- end row -->
+                                </div><!-- end columns -->
+                                
+                                <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8 content-side">
+                                	<form class="lg-booking-form" action="/app/prosesbooking" method="POST">
+                                        <div class="lg-booking-form-heading">
+                                        	<span>1</span>
+                                        	<h3>Data Pemesan yang Dapat Dihubungi</h3>
+                                        </div><!-- end lg-bform-heading -->
+                                        
+                                        <div class="personal-info">
+                                            <div class="row">
+        										<input type="hidden" class="form-control" name="idcus" id="idcus" value="<%=sessidcus%>" required/>
+        										<input type="hidden" class="form-control" name="idjad" id="idjad" value="<%=idjad%>" required/>
+        										<input type="hidden" class="form-control" name="pax" id="pax" value="<%=jp%>" required/>
+        										<input type="hidden" class="form-control" name="totalharga" id="totalharga" value="<%=total%>" required/>
+                                                <input type="hidden" class="form-control" name="tglotw" id="tglotw" value="<%=date%>" required/>
+
+                                                <div class="col-xs-6 col-sm-6">
+                                                    <div class="form-group">
+                                                        <label>Nama Pemesan</label>
+                                                        <input type="text" class="form-control" name="np" placeholder="Isikan Nama Pemesan" required/>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Nomor Telepon</label>
+                                                        <input type="number" class="form-control" name="nt" placeholder="Isikan Nomor Telepon" required/>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Email</label>
+                                                        <input type="email" class="form-control" name="em" placeholder="Isikan Email" required/>
+        												<p style="margin-top:5px">* Isikan alamat email dengan benar. Email digunakan untuk menerima rincian pembayaran dan notifikasi status pembayaran</p>
+                                                    </div>
+                                                </div><!-- end columns -->
+        
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label>Alamat Lengkap</label>
+                                                        <textarea style="overflow:auto; resize:none;" type="text" class="form-control" name="al" rows="12" placeholder="Isikan Alamat Lengkap Pemesan"/></textarea>
+                                                    </div>
+                                                </div><!-- end columns -->
+                                            </div><!-- end row -->
+                                        </div><!-- end personal-info -->
+                                        
+                                        <div class="lg-booking-form-heading">
+                                        	<span>2</span>
+                                        	<h3>Data Penumpang</h3>
+                                        </div><!-- end lg-bform-heading -->
+                                        
+        								<div class="personal-info">
+        									<%
+        										for(var i=1; i<=jp; i++)
+        										{
+                                                    %>
+                                                        <fieldset>
+                                                            <legend style="font-size:15px">
+                                                                Data Penumpang <%=i%>
+                                                            </legend>
+                                                            <div class="row">
+                                                                <div class="col-xs-12 col-sm-12">
+                                                                    <div class="form-group">
+                                                                        <label>Nomor Identitas</label>
+                                                                        <input class='form-control' type='number' id='noiden[<%=i%>]' name='noiden[<%=i%>]' required />
+                                                                    </div>
+                                                                </div><!-- end columns -->
+                                                            </div><!-- end row -->
+                                                            <div class="row">
+                                                                <div class="col-xs-12 col-sm-12">
+                                                                    <div class="form-group">
+                                                                        <label>Nama</label>
+                                                                        <input class='form-control' type='text' id='nama[<%=i%>]' name='nama[<%=i%>]' required />
+                                                                    </div>
+                                                                </div><!-- end columns -->
+                                                            </div><!-- end row -->
+                                                        </fieldset>
+                                                    <%
+        										}
+        									%>
+        								</div>
+        								
+                                        <button type="submit" class="btn btn-orange">Lanjutkan</button>
+                                        <a href="/app/home" class="btn btn-orange">Batalkan</a>
+                                    </form>
+                                </div><!-- end columns -->
+        
+                            </div><!-- end row -->
+                        </div><!-- end container -->         
+                    </div><!-- end cruise-booking -->
+                </section><!-- end innerpage-wrapper -->
+        		
+                    <section id="footer" class="ftr-heading-o ftr-heading-mgn-1">
+                        <div id="footer-bottom" class="ftr-bot-black">
+                            <div class="container">
+                                <div class="row">
+                                    <center><p>&copy; <%= moment().format('Y')%> Ojek Pulo. All rights reserved.</p></center>
+                                </div><!-- end row -->
+                            </div><!-- end container -->
+                        </div><!-- end footer-bottom -->
+                    </section>
+
+                <!-- Page Scripts Starts -->
+                <script src="/assets/assetss/js/jquery.min.js"></script>
+                <script src="/assets/assetss/js/jquery.colorpanel.js"></script>
+                <script src="/assets/assetss/js/bootstrap.min.js"></script>
+                <script src="/assets/assetss/js/bootstrap-datepicker.js"></script>
+                <script src="/assets/assetss/js/custom-navigation.js"></script>
+        		<script src="/assets/assetss/js/custom-date-picker.js"></script>
+                <!-- Page Scripts Ends -->
+            </body>
+        </html>

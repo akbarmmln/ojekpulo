@@ -1,0 +1,324 @@
+
+<%
+    var nk = data[0].nama_kapal;
+    var k = data[0].asal;
+    var t = data[0].tujuan;
+    var date = data[0].tanggal;
+    var jb = data[0].waktu_berangkat;
+    var jt = data[0].waktu_tiba;
+    var hpo = data[0].harga;
+    var jp = data[0].jumlahpenumpang;
+    var tb = data[0].totalbayar;
+    var tglbook = data[0].tanggal_booking;
+    var nm = data[0].nama_pemesan;
+    var em = data[0].email_ver;
+    var stat = data[0].status_pembayaran;
+
+    var basket = "tiket,"+tb+".00,1,"+tb+".00";
+    var wordsmentah = tb+".0011408317pZ8nb8joZpJh"+idbook;
+%>
+
+        <!doctype html>
+            <html lang="en">
+                <head>
+                    <title>Ojek Pulo</title>
+                    <meta charset="utf-8">
+                    <meta name="viewport" content="width=device-width,initial-scale=1">
+                    <link rel="icon" href="/assets/assetss/images/ship.png" type="image/x-icon">
+                    
+                    <!-- Google Fonts -->	
+                    <link href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900,900i%7CMerriweather:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+                    
+                    <!-- Bootstrap Stylesheet -->
+                    <link rel="stylesheet" href="/assets/assetss/css/bootstrap.min.css">
+                    
+                    <link rel="stylesheet" href="/assets/assetss/cardtemp/w3.css">
+                    
+                    <!-- Font Awesome Stylesheet -->
+                    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
+                        
+                    <!-- Custom Stylesheets -->	
+                    <link rel="stylesheet" href="/assets/assetss/css/style.css">
+                    <link rel="stylesheet" id="cpswitch" href="/assets/assetss/css/orange.css">
+                    <link rel="stylesheet" href="/assets/assetss/css/responsive.css">
+                    
+                    <!--Date-Picker Stylesheet-->
+                    <link rel="stylesheet" href="/assets/assetss/css/datepicker.css">
+                    
+                    <!-- Color Panel -->
+                    <link rel="stylesheet" href="/assets/assetss/css/jquery.colorpanel.css">
+                </head>
+                
+                <body>
+                    <!--====== LOADER =====-->
+                    <div class="loader"></div>
+            
+                    <?php $this->view('headertop');?>
+            		
+                    <nav class="navbar navbar-default main-navbar navbar-custom navbar-white" id="mynavbar-1">
+                        <div class="container">
+                            <div class="navbar-header">
+                                <button type="button" class="navbar-toggle" id="menu-button">
+                                  <span class="icon-bar"></span>
+                                  <span class="icon-bar"></span>
+                                  <span class="icon-bar"></span>                        
+                                </button>
+                                <!--<a href="" class="navbar-brand"><span><i class="fa fa-ship"></i>OJEK</span>PULO</a>-->
+                            </div><!-- end navbar-header -->
+                            
+                            <div class="collapse navbar-collapse" id="myNavbar1">
+                                <ul class="nav navbar-nav navbar-right navbar-search-link">
+                                    <li class="dropdown"><a href="/app/home">Home<span></span></a></li>
+            						
+                                    <li class="dropdown"><a href="javascript:void(0);">Jadwal Kapal<span></span></a>
+                                    </li>
+            						
+                                    <%
+                                    if(statlogin == "true")
+                                    {
+                                        %>
+                                        <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Pemesanan<span><i class="fa fa-angle-down"></i></span></a>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="/app/pesanan">Sedang Berlangsung</a></li>
+                                                <li><a href="">Lihat Daftar Pembelian</a></li>
+                                            </ul>
+                                        </li>
+                                        <%
+                                    }
+                                    %>
+                                            
+            						<li class="dropdown"><a href="javascript:void(0);">Contact<span></span></a></li>
+            						
+                            		<li><a href="javascript:void(0);" class="search-button"><span><i class="fa fa-search"></i></span></a></li>
+                                </ul>
+                            </div><!-- end navbar collapse -->
+                        </div><!-- end container -->
+                    </nav><!-- end navbar -->
+            		
+                    <div class="sidenav-content">
+                        <div id="mySidenav" class="sidenav" >
+                            <h2 id="web-name"><span><i class="fa fa-ship"></i></span>Ojek Pulo</h2>
+            
+                            <div id="main-menu">
+                            	<div class="closebtn">
+                                    <button class="btn btn-default" id="closebtn">&times;</button>
+                                </div><!-- end close-btn -->
+                                
+                                <div class="list-group panel">
+                                
+                                    <a href="/app/home" class="list-group-item"><span><i class="fa fa-home link-icon"></i></span>Home<span></span></a>
+                                    
+                                    <a href="javascript:void(0);"" class="list-group-item"><span><i class="fa fa-home link-icon"></i></span>Jadwal Kapal<span></span></a>
+
+                                    <%
+                                        if(statlogin == "true")
+                                        {
+                                            %>
+                                            <a href="#ships-links" class="list-group-item" data-toggle="collapse" data-parent="#main-menu"><span><i class="fa fa-ship link-icon"></i></span>Pemesanan<span><i class="fa fa-chevron-down arrow"></i></span></a>
+                                            <div class="collapse sub-menu" id="ships-links">
+                                                <a href="/app/pesanan" class="list-group-item">Sedang Berlangsung</a>
+                                                <a href="" class="list-group-item">Lihat Daftar Pembelian</a>
+                                            </div><!-- end sub-menu -->
+                                            <%
+                                        }
+                                    %>
+
+                                    <a href="javascript:void(0);" class="list-group-item"><span><i class="fa fa-globe link-icon"></i></span>Contact<span></span></a>
+                                </div><!-- end list-group -->
+                            </div><!-- end main-menu -->
+                        </div><!-- end mySidenav -->
+                    </div><!-- end sidenav-content -->
+    
+                    <!--======================= PAGE-COVER =====================-->
+                    <section class="w3-blue back-size" id="cover-cruise-search">
+                        <div class="container">
+                            <div class="row">
+                                <br>
+                                <div class="col-sm-12">
+                                	<h2 class="page-title">Pemesanan</h2>
+                                </div><!-- end columns -->
+                            </div><!-- end row -->
+                        </div><!-- end container -->
+                        <br>
+                    </section><!-- end page-cover -->
+            		
+                    <!--===== INNERPAGE-WRAPPER ====-->
+                    <section class="innerpage-wrapper">
+                    	<div id="cruise-booking" class="innerpage-section-padding">
+                            <div class="container">
+                                <div class="row">
+                                	<div class="col-xs-12 col-sm-12 col-md-5 col-lg-4 side-bar left-side-bar">
+                                    	<div class="row">
+                                        
+                                            <div class="col-xs-12 col-sm-6 col-md-12">
+                                                <div class="side-bar-block detail-block style2 text-center">
+                                                    <div class="detail-img text-center">
+            											<br><br><br><br><br>
+                                                        <div class="detail-title">
+                                                            <h4><a>Kapal Pergi</a></h4>
+                                                            <p>
+                                                                <%
+                                                                var hari = moment(date).format('dddd');
+                                                                var tanggalfull = moment(date).format('DD MMMM YYYY');
+                                                                %>
+                                                                <%=hari%>,
+                                                                <%=tanggalfull%>
+                                                            </p>
+                                                        </div><!-- end detail-title -->
+                                                    </div><!-- end detail-img -->
+                                                    
+                                                    <div class="table-responsive">
+                                                        <table class="table">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>Nama Kapal</td>
+                                                                    <td><%=nk%></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Keberangkatan</td>
+                                                                    <td><%=k%></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Kedatangan</td>
+                                                                    <td><%=t%></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Jam Berangkat</td>
+                                                                    <td><%=jb%></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Jam Tiba</td>
+                                                                    <td><%=jt%></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Lama Perjalanan</td>
+                                                                    <td>
+                                                                        <%
+                                                                        var then  = moment(date).format('DD/MM/YYYY') + ' ' + data[0].waktu_berangkat;
+                                                                        var now = moment(date).format('DD/MM/YYYY') + ' ' + data[0].waktu_tiba;
+                                                                        var ms = moment(now,"DD/MM/YYYY HH:mm:ss").diff(moment(then,"DD/MM/YYYY HH:mm:ss"));
+                                                                        var d = moment.duration(ms);
+                                                                        var s = Math.floor(d.asHours()) + " jam " + moment.utc(ms).format("mm") + " menit";
+                                                                        %>
+                                                                        <%=s%>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Jumlah Penumpang</td>
+                                                                    <td><%=jp%></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Harga Per Orang</td>
+                                                                    <td><%=hpo%></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Jumlah Harga</td>
+                                                                    <td>
+                                                                        <%
+                                                                        function convertToRupiah(angka)
+                                                                        {
+                                                                            var rupiah = '';		
+                                                                            var angkarev = angka.toString().split('').reverse().join('');
+                                                                            for(var i = 0; i < angkarev.length; i++) if(i%3 == 0) rupiah += angkarev.substr(i,3)+'.';
+                                                                            return 'Rp. '+rupiah.split('',rupiah.length-1).reverse().join('');
+                                                                        }
+
+                                                                        var hpo = hpo;
+                                                                        var jumlah = jp;
+                                                                        var total = hpo * jp;
+                                                                        %>
+                                                                        <%=convertToRupiah(total)%>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div><!-- end table-responsive -->
+                                                </div><!-- end side-bar-block -->
+                                            </div><!-- end columns -->
+                                            
+                                            <div class="col-xs-12 col-sm-6 col-md-12">    
+                                                <div class="side-bar-block support-block">
+                                                    <h3>Pusat Bantuan</h3>
+                                                    <p>Hubungi di nomor berikut</p>
+                                                    <div class="support-contact">
+                                                        <span><i class="fa fa-phone"></i></span>
+                                                        <p>+00 123 4567</p>
+                                                    </div><!-- end support-contact -->
+                                                </div><!-- end side-bar-block -->
+                                            </div><!-- end columns -->
+                                            
+                                        </div><!-- end row -->
+                                    
+                                    </div><!-- end columns -->
+                                    
+                                    <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8 content-side">
+                                    	<form class="lg-booking-form" action="http://staging.doku.com/Suite/Receive" method="POST">
+                                            <div class="lg-booking-form-heading">
+                                            	<span>3</span>
+                                            	<h3>Pilihan Jenis Pembayaran</h3>
+                                            </div><!-- end lg-bform-heading -->
+                                            
+                                            <div class="personal-info">
+                                                <div class="row">
+                                                    <div class="col-xs-6 col-sm-6">
+                                                        <input type="text" class="form-control" name="MALLID" value="11408317" readonly required/>
+                                                        <input type="text" class="form-control" name="BASKET" value="<%=basket%>" readonly required/>
+                                                        <input type="text" class="form-control" name="CHAINMERCHANT" value="NA" readonly required/>
+                                                        <input type="text" class="form-control" name="AMOUNT" value="<%=tb%>.00" readonly required/>
+                                                        <input type="text" class="form-control" name="PURCHASEAMOUNT" value="<%=tb%>.00" readonly required/>
+                                                        <input type="text" class="form-control" name="TRANSIDMERCHANT" value="<%=idbook%>" readonly required/>
+                                                        <input type="text" class="form-control" name="WORDS" value="<%= sha1(wordsmentah);%>" readonly required/>
+                                                        <input type="text" class="form-control" name="CURRENCY" value="360" readonly required/>
+                                                        <input type="text" class="form-control" name="PURCHASECURRENCY" value="360" readonly required/>
+                                                        <input type="text" class="form-control" name="COUNTRY" value="ID" readonly required/>
+                                                        <input type="text" class="form-control" name="SESSIONID" value="<%=idbook%>" readonly required/>
+                                                        <input type="text" class="form-control" name="REQUESTDATETIME" value="<%= moment().format('YYYYMMDDHHmmss')%>" readonly required/>
+                                                        <input type="text" class="form-control" name="NAME" value="<%=nm%>" readonly required/>
+                                                        <input type="text" class="form-control" name="EMAIL" value="<%=em%>" readonly required/>
+                                                        <input type="text" class="form-control" id="PAYMENTCHANNEL" name="PAYMENTCHANNEL" value="34" readonly required/>
+    
+                                                        <div class="form-group">
+                                                            <label>Nomor Pesanan / Nomor Booking</label>
+                                                            <input type="text" class="form-control" name="idbooking" value="<%=idbook%>" readonly required/>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Pilihan Jenis Pembayaran</label>
+                                                            <select class="form-control" id="jnsbayar" name="jnsbayar" onchange="tampilkan()">
+    															<option value="34">BRI Virtual Account</option>
+    															<option value="41">Mandiri Virtual Account</option>
+    															<option value="31">Indomaret</option>
+    															<option value="35">Alfagroup (Alfamart/Alfamidi/Alfaexpress/LAWSON/DANDAN)</option>
+    															<option value="36">ATM Bersama/Prima/ALTO</option>
+    														</select>
+                                                        </div>
+                                                    </div><!-- end columns -->
+                                                </div><!-- end row -->
+                                                <button type="submit" class="btn btn-orange">Lanjutkan</button>
+                                            </div><!-- end personal-info -->
+                                        </form>
+                                        <script>
+    										function tampilkan()
+    										{
+    											var jnspem = document.getElementById("jnsbayar").value;
+    											document.getElementById("PAYMENTCHANNEL").value = jnspem;
+    										}
+									</script>
+                                    </div><!-- end columns -->
+            
+                                </div><!-- end row -->
+                            </div><!-- end container -->         
+                        </div><!-- end cruise-booking -->
+                    </section><!-- end innerpage-wrapper -->
+            		
+                    <% include footer.ejs %>
+                    
+                    <!-- Page Scripts Starts -->
+                    <script src="/assets/assetss/js/jquery.min.js"></script>
+                    <script src="/assets/assetss/js/jquery.colorpanel.js"></script>
+                    <script src="/assets/assetss/js/bootstrap.min.js"></script>
+                    <script src="/assets/assetss/js/bootstrap-datepicker.js"></script>
+                    <script src="/assets/assetss/js/custom-navigation.js"></script>
+            		<script src="/assets/assetss/js/custom-date-picker.js"></script>
+                    <!-- Page Scripts Ends -->
+                </body>
+            </html>
